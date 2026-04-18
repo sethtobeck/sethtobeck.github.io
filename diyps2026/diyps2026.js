@@ -1,0 +1,136 @@
+var img;
+var img1;
+var img2;
+var img3;
+var img4;
+var img5;
+var img6;
+var img7;
+var img8;
+var img9;
+var img0;
+
+var initials ='sat'; // your initials
+var choice = '1'; // starting choice, so it is not empty
+var screenbg;
+var lastscreenshot=61; // last screenshot never taken
+
+function preload() {
+// preload() runs once, it may make you wait
+//  img = loadImage('cat.jpg');  // cat.jpg needs to be next to this .js file
+// you can link to an image on your github account
+  screenbg = loadImage('https://sethtobeck.github.io/images/600backgroundburger.png');
+  img = loadImage('https://sethtobeck.github.io/fishicon.png');
+  img1 = loadImage('https://sethtobeck.github.io/images/bottombun.png');
+  img2 = loadImage('https://sethtobeck.github.io/images/patty.png');
+  img3 = loadImage('https://sethtobeck.github.io/images/cheese.png');
+  img4 = loadImage('https://sethtobeck.github.io/images/tomato.png'); 
+  img5 = loadImage('https://sethtobeck.github.io/images/lettuce.png');
+  img6 = loadImage('https://sethtobeck.github.io/images/pickle.png');
+  img7 = loadImage('https://sethtobeck.github.io/images/onions.png');
+  img8 = loadImage('https://sethtobeck.github.io/images/topbun.png');
+} 
+
+function setup() {
+createCanvas(600, 600);  // canvas size
+background(screenbg);   // use our background screen color
+
+}
+
+function draw() {
+  if (keyIsPressed) {
+    choice = key; // set choice to the key that was pressed
+    clear_print(); // check to see if it is clear screen or save image
+  }
+  if (mouseIsPressed){
+    newkeyChoice(choice);  // if the mouse is pressed call newkeyChoice
+  }
+}
+
+function newkeyChoice(toolChoice) { //toolchoice is the key that was pressed
+  // the key mapping if statements that you can change to do anything you want.
+  // just make sure each key option has the a stroke or fill and then what type of 
+  // graphic function
+
+ if (toolChoice == '1' ) {  // first tool BOTTOM BUN
+   
+   image(img1, mouseX-100, mouseY-50, 200, 100);
+    
+  } else if (toolChoice == '2') { // second tool PATTY
+
+   image(img2, mouseX-100, mouseY-50, 200, 100);
+   
+  } else if (toolChoice == '3') { // third tool CHEESE
+
+   image(img3, mouseX-100, mouseY-50, 200, 100);
+   
+  } else if (toolChoice == '4') { // TOMATO
+
+  image(img4, mouseX-100, mouseY-50, 200, 100);
+  
+  
+  } else if (key == '5') { // LETTUCE
+  
+  image(img5, mouseX-100, mouseY-50, 200, 100);
+    
+
+  } else if (toolChoice == '6') { //PICKLE
+
+  image(img6, mouseX-100, mouseY-50, 200, 100);
+  
+  } else if (toolChoice == '7') { //CARMELIZED ONIONS
+
+  image(img7, mouseX-100, mouseY-50, 200, 100);
+  
+  } else if (toolChoice == '8') { //TOP BUN
+    
+  image(img8, mouseX-100, mouseY-50, 200, 100);
+  
+  } else if (toolChoice == '9') { //SAUCE
+
+    strokeWeight(0);
+    fill(200, 41, 34);
+    ellipse(mouseX, mouseY, 10, 10);
+    
+  } else if (toolChoice == '0') { //GREASE 
+  
+    strokeWeight(0);
+    fill(240, 189, 38);
+    ellipse(mouseX, mouseY, 10, 10);
+    
+  } else if (toolChoice == 'g' || toolChoice == 'G') { // g places the image we pre-loaded
+    image(img, mouseX-25, mouseY-25, 50, 50);
+    
+  }
+ }
+ 
+function testbox(r, g, b) {
+// this is a test function that will show you how you can put your own functions into the sketch
+  x = mouseX;
+  y = mouseY;
+  fill(r, g, b);
+  rect(x-50, y-50, 100, 100);
+
+}
+
+function clear_print() {
+// this will do one of two things, x clears the screen by resetting the background
+// p calls the routine saveme, which saves a copy of the screen
+  if (key == 'x' || key == 'X') {
+    background(screenbg); // set the screen back to the background color
+  } else if (key == 'p' || key == 'P') {
+     saveme();  // call saveme which saves an image of the screen
+  }
+}
+
+function saveme(){
+    //this will save the name as the intials, date, time and a millis counting number.
+    // it will always be larger in value then the last one.
+  filename=initials+day() + hour() + minute() +second();
+  if (second()!=lastscreenshot) { // don't take a screenshot if you just took one
+    saveCanvas(filename, 'jpg');
+    key="";
+  }
+  lastscreenshot=second(); // set this to the current second so no more than one per second
+  
+}
