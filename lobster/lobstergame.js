@@ -1,0 +1,610 @@
+
+
+var gameState = "startscreen";
+var cursorHover = false;
+var playerX = 450;
+var playerY = 420;
+var playerSpeed = 2;
+var playerSprite;
+var camX = 0;
+var camY = 0;
+let drop = undefined;
+let dropColor;
+let fade = 0;
+let buttonPressTimer = 0; 
+
+let messages = [
+  "...",
+  "it never ends",
+  "why am I here?",
+  "just another day of doing the same thing..",
+  "why am I stuck in this eternal cycle?",
+  "stuck just pressing a button."
+];
+let messages2 = [
+  "...",
+  "The year is 2570.",
+  "The world's resources have been depleted.",
+  "At least..",
+  "that's what we've been told."
+];
+let messages3 = [
+  "The people have gathered",
+  "But why?",
+  "To redeem their yearly gift, of course.",
+  "But who is giving out these gifts?",
+  "The one known as.."
+];
+let messages4 = [
+  "The Decision Maker.",
+  "",
+  "...",
+  "what is that in his hand?",
+  "is that..",
+  "a phone???"
+];
+
+let messages5 = [
+  "oh my god..",
+  "he's using an AI chat bot",
+  "what the #$@%"
+];
+let messages6 = [
+  "he even said please after his message.",
+  "...",
+  "..."
+];
+let messages7 = [
+  "WOAH",
+  "MAX WIN",
+  "that's huge"
+];
+let messages8 = [
+  "It even came with a wagon tank, how cool!",
+  "...",
+  "will the lobster be eaten?",
+  ".",
+  "..",
+  "...",
+  "no."
+];
+let messages9 = [
+  "for the instructions on eating a lobster were never given.",
+  "The End :)"
+];
+let messageIndex = 0;
+let message = messages[messageIndex]; //intro
+
+let endMessageIndex = 0;
+let endMessage = messages2[endMessageIndex]; //seq1
+
+let endMessageIndex2 = 0;
+let endMessage2 = messages3[endMessageIndex2]; //2
+
+let endMessageIndex3 = 0;
+let endMessage3 = messages4[endMessageIndex3];//3
+
+let endMessageIndex4 = 0;
+let endMessage4 = messages5[endMessageIndex4];//4
+
+let endMessageIndex5 = 0;
+let endMessage5 = messages6[endMessageIndex5]; //5
+
+let endMessageIndex6 = 0;
+let endMessage6 = messages7[endMessageIndex6]; //6
+
+let endMessageIndex7 = 0;
+let endMessage7 = messages8[endMessageIndex7]; //7
+
+let endMessageIndex8 = 0;
+let endMessage8 = messages9[endMessageIndex8]; //8
+
+function preload() {
+    titleScreen = loadImage('https://sethtobeck.github.io/images/lobstertitlescreen.gif');
+    idleD = loadImage('https://sethtobeck.github.io/images/idledown.gif');
+    idleU = loadImage('https://sethtobeck.github.io/images/idleup.gif');
+    idleR = loadImage('https://sethtobeck.github.io/images/idleright.gif');
+    idleL = loadImage('https://sethtobeck.github.io/images/idleleft.gif');
+    lobsterRoom = loadImage('https://sethtobeck.github.io/images/unpressed.png');
+    lobsterRoom2 = loadImage('https://sethtobeck.github.io/images/pressedun.png');
+    secret = loadImage('https://sethtobeck.github.io/images/secretpose.gif');
+    //lobsterRoom = loadImage('https://sethtobeck.github.io/images/gameroom.png'); //old background
+    front = loadImage('https://sethtobeck.github.io/images/foreground.png');
+    front2 = loadImage('https://sethtobeck.github.io/images/foregroundk.png');
+    seq1 = loadImage('https://sethtobeck.github.io/images/seq1.png');
+    seq2 = loadImage('https://sethtobeck.github.io/images/seq2.png');
+    seq3 = loadImage('https://sethtobeck.github.io/images/seq3.png');
+    seq4 = loadImage('https://sethtobeck.github.io/images/seq4.png');
+    seq5 = loadImage('https://sethtobeck.github.io/images/seq5.gif');
+    seq6 = loadImage('https://sethtobeck.github.io/images/seq6.png');
+    seq7 = loadImage('https://sethtobeck.github.io/images/seq7.png');
+    seq8 = loadImage('https://sethtobeck.github.io/images/seq8.png');
+    endtext = loadImage('https://sethtobeck.github.io/images/endtext.png');
+
+}
+
+//end of preload ===========================================================
+
+function setup() {
+  createCanvas(600, 600);
+  playerSprite = idleD;
+dropColor = color(255);
+}//IMPORTANT SETUP CLOSER BRACKET ----------
+
+function mousePressed() { 
+  if (gameState == "abyss") {
+    messageIndex++;
+
+    if (messageIndex < messages.length) {
+      message = messages[messageIndex];
+    } else {
+      gameState = "lobster";
+    }
+  }
+    else if (gameState == "end") {
+    endMessageIndex++;
+
+    if (endMessageIndex < messages2.length) {
+      endMessage = messages2[endMessageIndex];
+    } else {
+      gameState = "end2";
+    }
+  }  else if (gameState == "end2") {
+    endMessageIndex2++;
+
+    if (endMessageIndex2 < messages3.length) {
+      endMessage2 = messages3[endMessageIndex2];
+    } else {
+      gameState = "end3";
+    }
+  }  else if (gameState == "end3") {
+    endMessageIndex3++;
+
+    if (endMessageIndex3 < messages4.length) {
+      endMessage3 = messages4[endMessageIndex3];
+    } else {
+      gameState = "end4";
+    }
+  }  else if (gameState == "end4") {
+    endMessageIndex4++;
+
+    if (endMessageIndex4 < messages5.length) {
+      endMessage4 = messages5[endMessageIndex4];
+    } else {
+      gameState = "end5";
+    }
+  }  else if (gameState == "end5") {
+    endMessageIndex5++;
+
+    if (endMessageIndex5 < messages6.length) {
+      endMessage5 = messages6[endMessageIndex5];
+    } else {
+      gameState = "end6";
+    }
+  }  else if (gameState == "end6") {
+    endMessageIndex6++;
+
+    if (endMessageIndex6 < messages7.length) {
+      endMessage6 = messages7[endMessageIndex6];
+    } else {
+      gameState = "end7";
+    }
+  }  else if (gameState == "end7") {
+    endMessageIndex7++;
+
+    if (endMessageIndex7 < messages8.length) {
+      endMessage7 = messages8[endMessageIndex7];
+    } else {
+      gameState = "end8";
+    }
+  }  else if (gameState == "end8") {
+    endMessageIndex8++;
+
+    if (endMessageIndex8 < messages9.length) {
+      endMessage8 = messages9[endMessageIndex8];
+    } else {
+      gameState = "last";
+    }
+  }
+}// end of dialogue code 
+
+function keyPressed() {
+  if (gameState == "lobster" && (key == "p" || key == "P")) {
+
+    buttonPressTimer = 10;
+    
+    if (drop == "LOBSTER") {
+      return;
+    }
+    
+    rollDrop();
+
+    dropSize = 50;
+
+    // rarity colors
+    if (drop == "LOBSTER") {
+      dropColor = color(255, 100, 100);
+    }
+    else if (drop == "SOUP") {
+      dropColor = color(255, 255, 100);
+    }
+    else if (drop == "FISH") {
+      dropColor = color(100, 200, 255);
+    }
+    else {
+      dropColor = color(180);
+    }
+
+  }
+}
+
+function rollDrop() {
+ const p = random(); 
+ if (p < 0.01) {
+    drop = "LOBSTER";
+  }
+  // 20% 
+  else if (p < 0.21) {
+    drop = "SOUP";
+  }
+  //30% 
+  else if (p < 0.51) {
+    drop = "FISH"
+  }
+  //49%
+  else {
+    drop = "TRASH"
+  }
+}//rolling the drop
+
+function lobsterDrop() { //correcting placement of lobster text
+  if (drop == "LOBSTER"){
+    let dropX = lobsterRoom.width - 520;
+  }
+}
+
+function draw() {
+  if (gameState=="startscreen"){
+    intro();
+  }
+  
+  if (gameState == "abyss") {
+    abyss();
+  }
+  
+  if (gameState == "lobster") {
+    lobsterGame();
+  }
+  
+  if (gameState == "game") {
+    miniGame();
+  }
+  
+  if (gameState == "end") {
+    ending();
+  }if (gameState == "end2") {
+    ending2();
+  }if (gameState == "end3") {
+    ending3();
+  }if (gameState == "end4") {
+    ending4();
+  }if (gameState == "end5") {
+    ending5();
+  }if (gameState == "end6") {
+    ending6();
+  }if (gameState == "end7") {
+    ending7();
+  }if (gameState == "end8") {
+    ending8();
+  }
+if (gameState == "last") {
+    last();
+  }
+}
+function intro() {
+  background(titleScreen);
+ 
+  
+if (isColliding(mouseX, mouseY, 1, 1, width/2-275, height/2+225, 100, 50)) {
+    stroke(250);
+    strokeWeight(3);
+    cursorHover = true;
+    
+    if (mouseIsPressed) {
+      gameState = "abyss";
+    }
+  }
+  else {
+    noStroke();
+    cursorHover = false;
+  }
+  fill("red");
+  rect(width/2-275, height/2+225, 100, 50, 5);
+ fill("white");
+  noStroke();
+  textAlign(CENTER, CENTER);
+  textSize(24);
+  text("Play", width/2-225, height/2+250);
+}
+
+function isColliding(x1, y1, w1, h1, x2, y2, w2, h2) {
+  return x1 < x2 + w2 &&
+         x1 + w1 > x2 &&
+         y1 < y2 + h2 &&
+         y1 + h1 > y2;
+}//END OF TITLE SCREEN -----------------------------------------------------
+
+function abyss(){
+  
+background(10);
+
+
+stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(message, 40, 460);
+
+}//END OF ABYSS --------------------------------------------------------------
+
+
+
+
+function lobsterGame(){
+background(0);
+ let moveX = 0;
+  let moveY = 0;
+  
+ if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
+  moveY -= 2;
+  playerSprite = idleU;
+}
+
+if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
+  moveY += 2;
+  playerSprite = idleD;
+}
+
+if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
+  moveX -= 2;
+  playerSprite = idleL;
+}
+
+if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
+  moveX += 2;
+  playerSprite = idleR;
+}
+  if (key === '?') {
+  playerSprite = secret;
+  }
+  
+  
+if (playerY < 380) {
+playerY = 380;
+}
+
+
+let magnitude = sqrt(moveX * moveX + moveY * moveY);
+  if (magnitude > 0) {
+    moveX /= magnitude;
+    moveY /= magnitude;
+  }
+  
+  playerX += moveX * playerSpeed;
+playerY += moveY * playerSpeed;
+  
+  
+  let x1 = 0;
+let y1 = 600;
+let x2 = 363;
+let y2 = 380;
+
+// only check collision while player is within the slope's vertical range
+if (playerY <= y1 && playerY >= y2) {
+  let wallX = map(playerY, y1, y2, x1, x2);
+
+  // keep player to the right of the slope
+  if (playerX < wallX) {
+    playerX = wallX;
+  }
+}
+
+// keep player inside map
+let halfSize = 30;
+playerX = constrain(playerX, halfSize, lobsterRoom.width - halfSize);
+playerY = constrain(playerY, halfSize, lobsterRoom.height - halfSize);
+
+// camera follows player
+camX = playerX - width / 2;
+camY = playerY - height / 2;
+
+// keep camera inside map
+camX = constrain(camX, 0, lobsterRoom.width - width);
+camY = constrain(camY, 0, lobsterRoom.height - height);
+
+//background
+imageMode(CORNER);
+//image(lobsterRoom, -camX, -camY); old
+if (buttonPressTimer > 0) {
+  image(lobsterRoom2, -camX, -camY);
+  buttonPressTimer--;
+} else {
+  image(lobsterRoom, -camX, -camY);
+}
+
+//start of display of drop
+if (drop !== undefined) {
+  let dropX = lobsterRoom.width - 520;
+  let dropY = lobsterRoom.height - 475;
+
+  push();
+  textStyle(BOLD);
+  textSize(30);
+  fill(dropColor);
+  textAlign(LEFT, TOP);
+  text(drop, dropX - camX, dropY - camY);
+  pop();
+}
+
+// draw player
+imageMode(CENTER);
+image(playerSprite, playerX - camX, playerY - camY, 60, 60);
+
+//this below will change it does NOT work rn idea
+if (isColliding(playerX, playerY, 1, 1, lobsterRoom.width/2-275, lobsterRoom.height/2+225, 100, 50)) { // STUFF IN PROGRESS
+    stroke(250);
+    strokeWeight(3);
+    cursorHover = true;
+    
+    if (mouseIsPressed) {
+      gameState = "game";
+    }
+  }//end of test idk if this code is being used too scared  to remove
+image(front2, -camX * 0.5 + 400, 300, 800, 600); //foreground -
+
+
+
+if (drop == "LOBSTER") {
+  fade += 1;
+
+  fill(0, fade);
+  noStroke();
+  rect(0, 0, 600, 600);
+
+  if (fade >= 255) {
+    gameState = "end";
+  }
+}
+}//END OF LOBSTER -------------------------------
+
+function ending(){
+  background(50);
+  image(seq1, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage, 40, 460);
+}
+
+function ending2(){
+  background(50);
+  image(seq2, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage2, 40, 460);
+}
+
+function ending3(){
+  background(50);
+  image(seq3, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage3, 40, 460);
+}function ending4(){
+  background(50);
+  image(seq4, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage4, 40, 460);
+}function ending5(){
+  background(50);
+  image(seq5, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage5, 40, 460);
+}
+
+function ending6(){ //bug
+  background(50);
+  image(seq6, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage6, 40, 460);
+}
+
+function ending7(){ 
+  background(50);
+  image(seq7, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage7, 40, 460);
+}
+function ending8(){ 
+  background(50);
+  image(seq8, 300, 300, 600, 600);
+  stroke(200);
+  fill(0)
+  
+  rect(20, 440, 560, 140);
+  
+  fill(255);
+  noStroke();
+  textSize(20);
+  textAlign(LEFT, TOP);
+  text(endMessage8, 40, 460);
+}
+function last(){
+  background (1);
+  image(endtext, 300, 300, 600, 600);
+  let fade = 255
+ // if (gamestate == "last") {
+ // fade -= 1;
+
+ // fill(0, fade);
+ // noStroke();
+//  rect(0, 0, 600, 600);
+ // } failed attempt at ending fade in
+}
