@@ -59,24 +59,47 @@
 	<div class="col-sm-4 bg-dark"> </div>
 
 </div>
+<!--end of title row (right above iframe)-->
 
  <div class="row">
- 	<div class="column bg-dark text-white">
+ 	<div class="col-sm-2 bg-dark text-white">
 	</div>
 	
-	<div class="column bg-dark text-white">
-  <br>
-<iframe src="lobster/index.html" class="fluid mx-auto d-block" height="606" width="606" title="Iframe of LOBSTER"></iframe> 
+	<div class="col-sm-8 bg-dark text-white">
+  
+		<iframe src="lobster/index.html" class="fluid mx-auto d-block" height="606" width="606" title="Iframe of LOBSTER"></iframe> 
+		</div>
+	<div class="col-sm-2 bg-dark text-white">
+	</div>
+	
+</div>
+
+ <div class="row">
+	 	<div class="col-sm-4 bg-dark text-white">
+	</div>
+	
+	 	<div class="col-sm-4 bg-dark text-white">
 
 <h5 style="text-align: center;">LOBSTER: An Interactive Narrative</h5> 
 
 <p style="text-align: center;">Where are you? What are you? Why are you?</p>
+<p style="text-align: center;">Use WASD or Arrow Keys to move. Click the screen to advance the dialogue.</p>
+</div>
+ 	<div class="col-sm-4 bg-dark text-white">
+	</div>
+</div>
 
 
+ <div class="row">
+ <div class="col-sm-3 bg-dark text-white"> </div>
+ 	 	<div class="col-sm-6 bg-dark text-white">
+<p class="p-3">For my final project in Art 74, I decided to make an interactive narrative. This was all coded in p5.js on the software Processing and all of the art was drawn using Procreate. This piece speaks about technology and artificial intelligence and presents a story based around the idea that humans depend too much on technology. </p>
 <br>
-<p style="text-align: center;">For my final project in Art 74, I decided to make an interactive narrative. This was coded in p5.js on the software Processing and all of the art was drawn using Procreate.</p>
-
-
+<p class="p-3">I really enjoyed working on this project and I am happy with the end results. There are definitely quite a few bugs and things I want to go back and fix/rework in the future, but that is for another day. All of the current flaws and bugs have the potential to stay, to show my progress in coding and creating art.
+</p>
+</div>
+	 	<div class="col-sm-3 bg-dark text-white">
+	</div>
 	</div>
 	
 	<div class="column bg-dark text-white">
@@ -84,13 +107,29 @@
 </div>
 
  <div class="row">
-		<div class="col-sm-7">
-			<h4 style="text-align: center;"> ABOUT GAME </h4>
+		<div class="col-sm-5">
+			<h4 style="text-align: center;"> ABOUT THE CODE </h4>
 
-			<p class="p-3">This is my final project for Art 74. </p>
-			
-			<details> <summary>Here is the code</summary>
-			<pre>
+			<p class="p-3">DISCLAIMER: For this project I used ChatGPT to help me code/debug. Specifically for helping with the logic for these things:
+			</p>
+			<ul>
+				<li>Drop Variables that tied the drop results to the room rather than to the canvas</li>
+				<li>Magnitude Logic that prevented sped up diagnol movement</li>
+				<li>Dialogue Logic that made it so when the string of messages is done you get sent to a new function.</li>
+				<li>Collision Logic with a sloped wall</li>
+				<li>Constrain Logic that kept the player in the canvas and kept the cam on the background image</li>
+				<li>Fade Logic</li>
+				<li>"buttonPressTimer" variable work-around</li>
+			</ul>
+			<br>
+			<p class="p-3">I also must credit <a href="https://editor.p5js.org/pippinbarr/sketches/8NkxcrJsi" target="_blank">pippinbarr</a> for the basic randomizer code logic, <a href="https://editor.p5js.org/xismith/sketches/zLlHSHQRS" target="_blank">xismith</a> for the basic dialogue box code logic and my classmate <a href="https://haileyliuu.github.io/portfolio/art74/seagull-game.html" target="_blank">Hailey Liuu</a> for the Play Button & Cam X/Y Logic.
+			</p>
+			<br>
+			<p class="p-3">In terms of coding, I wanted to do as much as I could without using help from AI. So even though I used ChatGPT, I tried to limit its use to debugging when I was stuck and to introducing me to new variables/logic. 
+			</p>
+			<br>
+			<details> <summary class="p-3">CLICK HERE FOR CODE</summary>
+			<pre class="p-2">
 			
 
 var gameState = "startscreen";
@@ -704,23 +743,37 @@ function last(){
 			</pre>
 </details>
 		</div>
-	<div class="col-sm-5 bg-dark text-white">
+	<div class="col-sm-7 bg-dark text-white">
 	
 			<h4 style="text-align: center;"> Art For LOBSTER			</h4>
-			<!-- <p class="p-2">Sketches</p>
-			<img src="sethfacespin.gif" alt="gif test" width="100">
-			<p class="p-2">Sprites</p>
-			<img src="lighter.gif" alt="gif test" width="200">
-			<p class="p-2">Tileset</p> <br>
-			<img src="sethfacespin.gif" alt="gif test" width="100"> -->
-
-</div>
-
+			<p class="p-2">Player Sprite</p>
+			<img src="images/idledown.gif" alt="gif test" width="200">
+			<img src="images/idleleft.gif" alt="gif test" width="200">
+			<img src="images/idleright.gif" alt="gif test" width="200">
+			<img src="images/idleup.gif" alt="gif test" width="200">
+			
+			<p class="p-2">Lobster Room Art Test Iterations</p>
+			<img src="images/gameroom.png" alt="gif test" width="800">
+			<img src="images/lobstertank.png" alt="gif test" width="600">
+			<p class="p-2">Lobster Room (Current State)</p>
+			<img src="images/pressedun.png" alt="gif test" width="600">
+			<img src="images/unpressed.png" alt="gif test" width="600">
+			<p class="p-2">Foreground Iterations</p>
+			<img src="images/foreground.png" alt="gif test" width="600">
+			<img src="images/foregroundk.png" alt="gif test" width="600">
+<p class="p-2">Ending Sequence (SPOILERS)</p>
+			<img src="images/seq1.png" alt="gif test" width="600">
+			<img src="images/seq2.png" alt="gif test" width="600">
+			<img src="images/seq3.png" alt="gif test" width="600">
+			<img src="images/seq4.png" alt="gif test" width="600">
+			<img src="images/seq5.gif" alt="gif test" width="600">
+			<img src="images/seq6.png" alt="gif test" width="600">
+			<img src="images/seq7.png" alt="gif test" width="600">
+			<img src="images/seq8.png" alt="gif test" width="600">
+			<img src="images/endtext.png" alt="gif test" width="600">
 
 	</div>
-</div>
-
-
+	
 </div>
 </body>
 </html>
